@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<select id="selectNumber">
+  <option value="volvo">choose a number</option>
+  
+</select>
+  
+  
+  <script>
+  var myArray = new Array("1", "2", "3", "4", "5","6");
+
+
+// Get dropdown element from DOM
+var dropdown = document.getElementById("selectNumber");
+
+// Loop through the array
+for (var i = 0; i < myArray.length; ++i) {
+    // Append the element to the end of Array list
+    dropdown[dropdown.length] = new Option(myArray[i], myArray[i]);
+}
+  </script>
+</body>
+</html>

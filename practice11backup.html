@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+</style>
+
+<script src="script/jquery-3.1.1.js"></script>
+
+  
+
+</head>
+<body>
+
+<table id="subscription_table">
+  <tr>
+    <th></th>
+    <th>Plan Name</th>
+    <th>Internal Id</th>
+    <th>Drink Count</th>
+    <th>Drinks Per Day</th>
+    <th>Days Count</th>
+    <th>Subscriptions Price</th>
+    <th>Max Subscriptions</th>
+    <th>Active</th>
+    <th>Delete</th>
+  </tr> 
+  
+</table>
+
+<script>
+    var URL = "http://13.90.211.202/subscriptions";
+
+
+    $(document).ready(populateTableData());
+
+
+
+    function populateTableData(){
+        jQuery.support.cors = true;
+        $.ajax({
+            type: "GET",
+            url: URL,
+            contentType: "application/json",
+            cache: false,
+            success: function(data){
+                var trHTML = '';
+                var count = 1;
+                $.each(data, function (i, item) {
+                if (item.maxSubscriptions == undefined) 
+                {
+                item.maxSubscriptions="";
+                 }
+                    trHTML += '<tr><td>'+count+++'</td><td>' + item.planName + '</td><td>' + item.internalID + '</td>'+ '<td>' + item.drinksCount + '</td>'+ '<td>' + item.drinksPerDay + '</td>'+ '<td>' + item.daysCount + '</td>'+ '<td><a href="file:///home/sneha/Desktop/vivek/Projects/practice/practice12/practice12.html">' + item.subscriptionPrice + '</a></td>'+ '<td>' + item.maxSubscriptions + '</td>'+ '<td>' + item.active + '</td>'+ '<td><button type="delete">delete</td></tr>';
+                });
+                $('#subscription_table').append(trHTML);
+            },
+            error: function(msg){
+                alert(msg);
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>
